@@ -1,0 +1,56 @@
+Table student {
+  student_id integer [primary key]
+  username varchar
+  email varchar
+  password varchar
+  first_name varchar
+  last_name varchar
+}
+
+Table courses {
+  course_id integer [primary key]
+  course_name varchar
+  description text
+  start_date date
+  end_date date
+}
+
+Table enrollments {
+  enrollment_id integer [primary key]
+  student_id integer
+  course_id integer
+  enrollment_date date
+}
+
+Table lessons{
+  lesson_id integer [primary key]
+  course_id integer
+  lesson_title varchar
+  content text
+  order int
+}
+
+Table assignments{
+  assignment_id int [primary key]
+  course_id int
+  assignment_title varchar
+  due_date date
+  description text
+}
+
+Table submissions{
+  submission_id int [primary key]
+  enrollment_id int
+  assignment_id int
+  submitted_date datetime
+  content blob
+  grade varchar
+  feedback text
+}
+
+Ref: enrollments.student_id> student.student_id
+Ref: enrollments.course_id> courses.course_id
+Ref: lessons.course_id> courses.course_id
+Ref: submissions.enrollment_id> enrollments.enrollment_id
+Ref: submissions.assignment_id> assignments.assignment_id
+Ref: assignments.course_id> courses.course_id
